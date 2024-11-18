@@ -1,0 +1,15 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.boxes{
+    font-size: 20px;
+    margin: 10px 0px;
+    font-weight: 600;
+    height: 35px;
+}
+.boxes:nth-child(odd){
+    background-color: rgb(143, 53, 53);
+    color: #fff;
+}
