@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import Loading from '../Loading';
+import {server} from '../server'
 
 const Allocate = () => {
 
@@ -36,7 +37,7 @@ const Allocate = () => {
                 return;
             }
 
-            const response = await fetch(`http://localhost:5000/committee/detail`, {
+            const response = await fetch(`${server}/committee/detail`, {
                 method: 'GET',
                 headers: {
                     'Authorization': token
@@ -57,7 +58,7 @@ const Allocate = () => {
     const AllocateSupervisor = async (e) => {
         try {
             e.preventDefault();
-            const response = await fetch(`http://localhost:5000/committee/allocate-group`, {
+            const response = await fetch(`${server}/committee/allocate-group`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
@@ -87,7 +88,7 @@ const Allocate = () => {
                 alert('Authorization token not found', 'danger');
                 return;
             }
-            const response = await fetch("http://localhost:5000/supervisor/get-supervisors", {
+            const response = await fetch(`${server}/supervisor/get-supervisors`, {
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json'
@@ -103,7 +104,7 @@ const Allocate = () => {
     const getList = async () => {
         try {
             setLoading(true);
-            const response = await fetch(`http://localhost:5000/allocation/list`, {
+            const response = await fetch(`${server}/allocation/list`, {
                 method: "GET"
             });
             const json = await response.json();
@@ -125,7 +126,7 @@ const Allocate = () => {
     const [projects, setProjects] = useState([]);
     const getProjects = async () => {
         try {
-            const response = await fetch(`http://localhost:5000/allocation/groups`, {
+            const response = await fetch(`${server}/allocation/groups`, {
                 method: "GET"
             });
             const json = await response.json();

@@ -10,6 +10,7 @@ import Loading from '../Loading';
 import { BarChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Bar, Cell } from 'recharts';
 import { Modal } from 'react-bootstrap';
 import StuRequest from './StuRequest';
+import {server} from '../server'
 
 const Progress = (props) => {
 
@@ -98,7 +99,7 @@ const Progress = (props) => {
                 alert('Authorization token not found', 'danger');
                 return;
             }
-            const response = await fetch(`http://localhost:5000/student/send-project-request`, {
+            const response = await fetch(`${server}/student/send-project-request`, {
                 method: 'POST', // Change to POST
                 headers: {
                     'Content-Type': 'application/json',
@@ -131,7 +132,7 @@ const Progress = (props) => {
                 alert('Authorization token not found', 'danger');
                 return;
             }
-            const response = await fetch('http://localhost:5000/student/my-group', {
+            const response = await fetch(`${server}/student/my-group`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -214,7 +215,7 @@ const Progress = (props) => {
                 alert('Authorization token not found', 'danger');
                 return;
             }
-            const response = await fetch("http://localhost:5000/supervisor/get-supervisors", {
+            const response = await fetch(`${server}/supervisor/get-supervisors`, {
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json'

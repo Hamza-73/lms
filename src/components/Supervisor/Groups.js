@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
+import {server} from '../server'
 
 const Groups = (props) => {
   const [group, setGroup] = useState({ groups: [] });
@@ -20,7 +21,7 @@ const Groups = (props) => {
       console.log('add stdents starts');
       const token = localStorage.getItem('token');
       console.log('add student is ', addStudent)
-      const response = await fetch(`http://localhost:5000/supervisor/add-student/${addStudent.projectTitle}/${addStudent.rollNo}`, {
+      const response = await fetch(`${server}/supervisor/add-student/${addStudent.projectTitle}/${addStudent.rollNo}`, {
         method: 'POST',
         headers: {
           Authorization: token,
@@ -48,7 +49,7 @@ const Groups = (props) => {
     try {
       e.preventDefault();
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:5000/supervisor/give-marks/${groupId}`, {
+      const response = await fetch(`${server}/supervisor/give-marks/${groupId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -77,7 +78,7 @@ const Groups = (props) => {
   const getGroup = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/supervisor/my-groups', {
+      const response = await fetch(`${server}/supervisor/my-groups`, {
         method: 'GET',
         headers: {
           'Content-Type': 'appication/json',
@@ -116,7 +117,7 @@ const Groups = (props) => {
 
   const getRollNo = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/student/rollNo`, {
+      const response = await fetch(`${server}/student/rollNo`, {
         method: "GET",
       });
       const json = await response.json();
@@ -134,7 +135,7 @@ const Groups = (props) => {
       return;
     }
     try {
-      const response = await fetch(`http://localhost:5000/supervisor/changeName/${groupId}`, {
+      const response = await fetch(`${server}/supervisor/changeName/${groupId}`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',

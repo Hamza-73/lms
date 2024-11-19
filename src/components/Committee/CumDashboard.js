@@ -5,6 +5,7 @@ import Loading from '../Loading';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import { Modal } from 'react-bootstrap';
+import {server} from '../server'
 
 const CumDashboard = (props) => {
   const history = useNavigate();
@@ -26,7 +27,7 @@ const CumDashboard = (props) => {
         return;
       }
       setLoading(true);
-      const response = await fetch("http://localhost:5000/rules/get-all-roles", {
+      const response = await fetch(`${server}/rules/get-all-roles`, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': token,
@@ -48,7 +49,7 @@ const CumDashboard = (props) => {
         return;
       }
       setLoading(true);
-      const response = await fetch("http://localhost:5000/rules/get-roles", {
+      const response = await fetch(`${server}/rules/get-roles`, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': token,
@@ -66,7 +67,7 @@ const CumDashboard = (props) => {
   const getRole = async (roleName) => {
     try {
       setCheck(true);
-      const response = await axios.get(`http://localhost:5000/rules/get-rules/${roleName}`, {
+      const response = await axios.get(`${server}/rules/get-rules/${roleName}`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -85,7 +86,7 @@ const CumDashboard = (props) => {
     try {
       e.preventDefault();
       setCheck(true);
-      const response = await axios.put(`http://localhost:5000/rules/edit-rules/${defineRole}`, {
+      const response = await axios.put(`${server}/rules/edit-rules/${defineRole}`, {
         rules: modalRules,
       }, {
         headers: {
@@ -164,7 +165,7 @@ const CumDashboard = (props) => {
         return;
       }
 
-      const response = await fetch(`http://localhost:5000/committee/detail`, {
+      const response = await fetch(`${server}/committee/detail`, {
         method: 'GET',
         headers: {
           'Authorization': token
@@ -205,7 +206,7 @@ const CumDashboard = (props) => {
       }
 
       const response = await fetch(
-        'http://localhost:5000/rules/add-role',
+        `${server}/rules/add-role`,
         {
           method: "POST",
           headers: {
@@ -260,7 +261,7 @@ const CumDashboard = (props) => {
 
   const deleteRules = async (e) => {
     try {
-      const response = await fetch(`http://localhost:5000/rules/delete-rule/${defineRole}`, {
+      const response = await fetch(`${server}/rules/delete-rule/${defineRole}`, {
         method: "DELETE",
       });
       const json = await response.json();

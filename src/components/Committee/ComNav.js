@@ -7,6 +7,7 @@ import 'react-notifications/lib/notifications.css';
 import 'jquery';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {server} from '../server'
 
 
 const ComNav = (props) => {
@@ -34,7 +35,7 @@ const ComNav = (props) => {
                     return;
                 }
 
-                const response = await fetch(`http://localhost:5000/${props.detailLink}/detail`, {
+                const response = await fetch(`${server}/${props.detailLink}/detail`, {
                     method: 'GET',
                     headers: {
                         'Authorization': token

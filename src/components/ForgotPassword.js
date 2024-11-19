@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 // import styles from '../css/forgotPassword.module.css';
+import {server} from './server'
 
 import image from '../images/home.jpg'
 import Loading from './Loading';
@@ -23,7 +24,7 @@ const ForgotPassword = (props) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        const response = await fetch(`http://localhost:5000/${props.detailLink}/forgot-password`, {
+        const response = await fetch(`${server}/${props.detailLink}/forgot-password`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -4,6 +4,7 @@ import image1 from '../../images/logo.png'
 import axios from 'axios'
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
+import {server} from '../server'
 
 const AdminNav = (props) => {
     let history = useNavigate()
@@ -30,7 +31,7 @@ const AdminNav = (props) => {
                     return;
                 }
 
-                const response = await fetch(`http://localhost:5000/${props.detailLink}/detail`, {
+                const response = await fetch(`${server}/${props.detailLink}/detail`, {
                     method: 'GET',
                     headers: {
                         'Authorization': token

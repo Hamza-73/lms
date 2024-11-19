@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import image from '../images/home.jpg';
+import {server} from './server'
 
 const ResetPassword = (props) => {
     const [password, setPassword] = useState('');
@@ -33,7 +34,7 @@ const ResetPassword = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         axios
-            .post(`http://localhost:5000/${props.user}/reset-password/${id}/${token}`, { password })
+            .post(`${server}/${props.user}/reset-password/${id}/${token}`, { password })
             .then((res) => {
                 if (res.data.success) {
                     alert(res.data.message);

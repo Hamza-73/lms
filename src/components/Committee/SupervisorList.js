@@ -7,6 +7,9 @@ import 'react-notifications/lib/notifications.css';
 // import Modal from "bootstrap/js/dist/modal";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Modal } from 'react-bootstrap';
+import {server} from '../server'
+
+
 const SupervisorList = (props) => {
   const history = useNavigate();
   const [data, setData] = useState({ members: [] });
@@ -37,7 +40,7 @@ const SupervisorList = (props) => {
       }
 
       console.log('registering ', register)
-      const response = await fetch("http://localhost:5000/supervisor/create", {
+      const response = await fetch(`${server}/supervisor/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -97,7 +100,7 @@ const SupervisorList = (props) => {
 
 
       const id = selectedSupervisor._id;
-      const response = await fetch(`http://localhost:5000/supervisor/edit/${id}`, {
+      const response = await fetch(`${server}/supervisor/edit/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
@@ -135,7 +138,7 @@ const SupervisorList = (props) => {
     const confirmed = window.confirm('Are you sure you want to delete this supervisor?');
     if (confirmed) {
       try {
-        const response = await fetch(`http://localhost:5000/supervisor/delete/${id}`, {
+        const response = await fetch(`${server}/supervisor/delete/${id}`, {
           method: "DELETE"
         });
         const json = await response.json();
@@ -161,7 +164,7 @@ const SupervisorList = (props) => {
         alert('Authorization token not found', 'danger');
         return;
       }
-      const response = await axios.get("http://localhost:5000/supervisor/get-supervisors", {
+      const response = await axios.get(`${server}/supervisor/get-supervisors`, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -258,7 +261,7 @@ const SupervisorList = (props) => {
         return;
       }
 
-      const response = await fetch(`http://localhost:5000/${props.detailLink}/detail`, {
+      const response = await fetch(`${server}/${props.detailLink}/detail`, {
         method: 'GET',
         headers: {
           'Authorization': token
@@ -284,7 +287,7 @@ const SupervisorList = (props) => {
 
   const makeCommittee = async (username) => {
     try {
-      const response = await fetch(`http://localhost:5000/admin/make-committee`, {
+      const response = await fetch(`${server}/admin/make-committee`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -375,7 +378,7 @@ const SupervisorList = (props) => {
     formData.append('excelFile', file);
 
     try {
-      const response = await fetch(`http://localhost:5000/upload/${userType}`, {
+      const response = await fetch(`${server}/upload/${userType}`, {
         method: 'POST',
         body: formData,
       });

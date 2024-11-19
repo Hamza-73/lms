@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Loading from './Loading';
+import {server} from './server'
 
 const Notification = (props) => {
     const [notification, setNotification] = useState({ notification: [] });
@@ -10,7 +11,7 @@ const Notification = (props) => {
             try {
                 setLoading(true);
                 const token = localStorage.getItem('token');
-                const response = await fetch(`http://localhost:5000/${props.user}/notification`, {
+                const response = await fetch(`${server}/${props.user}/notification`, {
                     method: "GET",
                     headers: {
                         "Authorization": token
@@ -38,7 +39,7 @@ const Notification = (props) => {
         try {
             const token = localStorage.getItem('token');
             console.log('notification is marked');
-            const response = await fetch(`http://localhost:5000/${props.user}/mark-notification-seen/${index}`, {
+            const response = await fetch(`${server}/${props.user}/mark-notification-seen/${index}`, {
                 method: "POST",
                 headers: {
                     "Authorization": token

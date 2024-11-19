@@ -9,6 +9,7 @@ import {
     NotificationManager,
 } from "react-notifications";
 import "react-notifications/lib/notifications.css";
+import {server} from './server'
 
 const Login = (props) => {
     const imgStyle = {
@@ -27,7 +28,7 @@ const Login = (props) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch(`http://localhost:5000${props.loginRoute}`, {
+        const response = await fetch(`${server}${props.loginRoute}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

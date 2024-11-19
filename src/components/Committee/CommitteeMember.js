@@ -8,6 +8,7 @@ import {
 } from "react-notifications";
 import "react-notifications/lib/notifications.css";
 import { Modal } from "react-bootstrap";
+import {server} from '../server'
 
 const CommitteeMember = (props) => {
   const history = useNavigate();
@@ -34,7 +35,7 @@ const CommitteeMember = (props) => {
 
   const makeAdmin = async (username) => {
     try {
-      const response = await fetch(`http://localhost:5000/admin/make-admin`, {
+      const response = await fetch(`${server}/admin/make-admin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -69,7 +70,7 @@ const CommitteeMember = (props) => {
         return;
       }
 
-      const response = await fetch("http://localhost:5000/committee/register", {
+      const response = await fetch(`${server}/committee/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -117,7 +118,7 @@ const CommitteeMember = (props) => {
       }
 
       const id = selectedStudent._id;
-      const response = await fetch(`http://localhost:5000/committee/edit/${id}`,
+      const response = await fetch(`${server}/committee/edit/${id}`,
         {
           method: "PUT",
           headers: {
@@ -169,7 +170,7 @@ const CommitteeMember = (props) => {
     if (confirmed) {
       try {
         console.log('id is ', id)
-        const response = await axios.delete(`http://localhost:5000/committee/delete/${id}`,
+        const response = await axios.delete(`${server}/committee/delete/${id}`,
           {
             headers: {
               'Content-Type': 'application/json',
@@ -194,7 +195,7 @@ const CommitteeMember = (props) => {
   // Function to get members
   const getMembers = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/committee/get-members", {
+      const response = await axios.get(`${server}/committee/get-members`, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -216,7 +217,7 @@ const CommitteeMember = (props) => {
         return;
       }
 
-      const response = await fetch(`http://localhost:5000/${props.detailLink}/detail`, {
+      const response = await fetch(`${server}/${props.detailLink}/detail`, {
         method: 'GET',
         headers: {
           'Authorization': token
@@ -404,7 +405,7 @@ const handleChange1 = (e) => {
     formData.append('excelFile', file);
 
     try {
-      const response = await fetch(`http://localhost:5000/upload/${userType}`, {
+      const response = await fetch(`${server}/upload/${userType}`, {
         method: 'POST',
         body: formData,
       });

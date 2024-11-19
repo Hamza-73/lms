@@ -4,6 +4,7 @@ import { NotificationContainer, NotificationManager } from 'react-notifications'
 import 'react-notifications/lib/notifications.css';
 import { Modal } from 'react-bootstrap';
 import { SetMealSharp } from '@mui/icons-material';
+import {server} from '../server'
 
 const EligibleGroup = (props) => {
   const [group, setGroup] = useState({ groups: [] });
@@ -24,7 +25,7 @@ const EligibleGroup = (props) => {
         alert('Authorization token not found', 'danger');
         return;
       }
-      const response = await fetch("http://localhost:5000/committee/progress", {
+      const response = await fetch(`${server}/committee/progress`, {
         method: "GET",
         headers: {
           'Content-Type': 'application/json'
@@ -42,7 +43,7 @@ const EligibleGroup = (props) => {
     try {
       e.preventDefault();
       console.log('external ', viva.external)
-      const response = await fetch(`http://localhost:5000/viva/schedule-viva`, {
+      const response = await fetch(`${server}/viva/schedule-viva`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -90,7 +91,7 @@ const EligibleGroup = (props) => {
         return;
       }
 
-      const response = await fetch(`http://localhost:5000/committee/detail`, {
+      const response = await fetch(`${server}/committee/detail`, {
         method: 'GET',
         headers: {
           'Authorization': token
@@ -120,7 +121,7 @@ const EligibleGroup = (props) => {
   // Function to get members
   const getCommittee = async () => {
     try {
-      const response = await fetch("http://localhost:5000/supervisor/get-supervisors", {
+      const response = await fetch(`${server}/supervisor/get-supervisors`, {
         method: "GET",
         headers: {
           'Content-Type': 'application/json'
@@ -142,7 +143,7 @@ const EligibleGroup = (props) => {
         alert('Authorization token not found', 'danger');
         return;
       }
-      const response = await fetch("http://localhost:5000/external/get-externals", {
+      const response = await fetch(`${server}/external/get-externals`, {
         method: "GET",
         headers: {
           'Content-Type': 'application/json'

@@ -5,6 +5,7 @@ import Loading from '../Loading';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import { Modal } from 'react-bootstrap';
+import {server} from '../server'
 
 const External = (props) => {
     const history = useNavigate();
@@ -32,7 +33,7 @@ const External = (props) => {
             }
 
             console.log('registering ', register)
-            const response = await fetch("http://localhost:5000/external/create", {
+            const response = await fetch(`${server}/external/create`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -88,7 +89,7 @@ const External = (props) => {
             }
 
             const id = selectedSupervisor._id;
-            const response = await fetch(`http://localhost:5000/external/edit/${id}`, {
+            const response = await fetch(`${server}/external/edit/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
@@ -125,7 +126,7 @@ const External = (props) => {
         const confirmed = window.confirm('Are you sure you want to delete this supervisor?');
         if (confirmed) {
             try {
-                const response = await fetch(`http://localhost:5000/external/delete/${id}`, {
+                const response = await fetch(`${server}/external/delete/${id}`, {
                     method: "DELETE"
                 });
                 const json = await response.json();
@@ -156,7 +157,7 @@ const External = (props) => {
                 alert('Authorization token not found', 'danger');
                 return;
             }
-            const response = await axios.get("http://localhost:5000/external/get-externals", {
+            const response = await axios.get(`${server}/external/get-externals`, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -253,7 +254,7 @@ const External = (props) => {
                 return;
             }
 
-            const response = await fetch(`http://localhost:5000/committee/detail`, {
+            const response = await fetch(`${server}/committee/detail`, {
                 method: 'GET',
                 headers: {
                     'Authorization': token
@@ -338,7 +339,7 @@ const External = (props) => {
         formData.append('excelFile', file);
 
         try {
-            const response = await fetch(`http://localhost:5000/upload/${userType}`, {
+            const response = await fetch(`${server}/upload/${userType}`, {
                 method: 'POST',
                 body: formData,
             });

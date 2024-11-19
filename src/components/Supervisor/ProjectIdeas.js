@@ -4,6 +4,7 @@ import { NotificationContainer, NotificationManager } from 'react-notifications'
 import 'react-notifications/lib/notifications.css';
 import axios from 'axios';
 import { Modal } from 'react-bootstrap';
+import {server} from '../server'
 
 const ProjectIdeas = () => {
   const [fypIdea, setFypIdea] = useState({
@@ -31,7 +32,7 @@ const ProjectIdeas = () => {
     try {
       setLoading(true);
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/supervisor/myIdeas', {
+      const response = await fetch(`${server}/supervisor/myIdeas`, {
         method: 'GET',
         headers: {
           'Authorization': token
@@ -55,7 +56,7 @@ const ProjectIdeas = () => {
   const handleIdea = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:5000/supervisor/send-project-idea`, {
+      const response = await fetch(`${server}/supervisor/send-project-idea`, {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",
@@ -91,7 +92,7 @@ const ProjectIdeas = () => {
       e.preventDefault();
       console.log('adding students starts');
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:5000/supervisor/add-student/${projectTitle}/${rollNo}`, {
+      const response = await fetch(`${server}/supervisor/add-student/${projectTitle}/${rollNo}`, {
         method: 'POST',
         headers: {
           Authorization: token,
@@ -122,7 +123,7 @@ const ProjectIdeas = () => {
         console.log('project id is ', id);
 
         const token = localStorage.getItem('token');
-        const response = await fetch(`http://localhost:5000/supervisor/deleteProposal/${id}`, {
+        const response = await fetch(`${server}/supervisor/deleteProposal/${id}`, {
           method: 'DELETE',
           headers: {
             Authorization: token,
@@ -157,7 +158,7 @@ const ProjectIdeas = () => {
       e.preventDefault();
       console.log('fypIdea is ', fypIdea.active)
       const token = localStorage.getItem('token');
-      const response = await axios.put(`http://localhost:5000/supervisor/editProposal/${projectId}`, {
+      const response = await axios.put(`${server}/supervisor/editProposal/${projectId}`, {
         projectTitle: fypIdea.projectTitle, description: fypIdea.description,
         scope: fypIdea.scope, active: fypIdea.active
       }, {
@@ -238,7 +239,7 @@ const ProjectIdeas = () => {
 
   const getRollNo = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/student/rollNo`, {
+      const response = await fetch(`${server}/student/rollNo`, {
         method: "GET",
       });
       const json = await response.json();

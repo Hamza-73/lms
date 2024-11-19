@@ -4,6 +4,7 @@ import SideBar from '../SideBar';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import { Modal } from 'react-bootstrap';
+import {server} from '../server'
 
 const ProjectRequests = (props) => {
   const [requests, setRequests] = useState({ request: [] });
@@ -16,7 +17,7 @@ const ProjectRequests = (props) => {
       try {
         setLoading(true);
         const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:5000/supervisor/view-sent-proposals', {
+        const response = await fetch(`${server}/supervisor/view-sent-proposals`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -48,7 +49,7 @@ const ProjectRequests = (props) => {
       e.preventDefault();
       console.log('request is started');
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:5000/supervisor/improve-request/${requestId}`, {
+      const response = await fetch(`${server}/supervisor/improve-request/${requestId}`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
@@ -85,7 +86,7 @@ const ProjectRequests = (props) => {
       console.log('request is started');
       console.log('improve', improve)
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:5000/supervisor/reject-request/${id}`, {
+      const response = await fetch(`${server}/supervisor/reject-request/${id}`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
@@ -115,7 +116,7 @@ const ProjectRequests = (props) => {
     try {
       console.log('request is started');
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:5000/supervisor/accept-request/${id}`, {
+      const response = await fetch(`${server}/supervisor/accept-request/${id}`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',

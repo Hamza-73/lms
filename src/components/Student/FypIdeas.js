@@ -3,6 +3,7 @@ import Loading from '../Loading';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import SideBar from '../SideBar';
+import {server} from '../server'
 
 const FypIdeas = () => {
     const [group, setGroup] = useState({
@@ -78,7 +79,7 @@ const FypIdeas = () => {
                     return;
                 }
                 console.log('before fetch');
-                const response = await fetch('http://localhost:5000/student/my-group', {
+                const response = await fetch(`${server}/student/my-group`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -104,7 +105,7 @@ const FypIdeas = () => {
         const getAvailableGroups = async () => {
             try {
                 setLoading(true);
-                const response = await fetch('http://localhost:5000/projects/projects', {
+                const response = await fetch('${server}/projects/projects', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -140,7 +141,7 @@ const FypIdeas = () => {
             console.log('project is ', title);
             const encodedTitle = encodeURIComponent(title);
             const token = localStorage.getItem('token');
-            const response = await fetch(`http://localhost:5000/student/request-to-join/${encodedTitle}`, {
+            const response = await fetch(`${server}/student/request-to-join/${encodedTitle}`, {
                 method: 'POST',
                 headers: {
                     Authorization: token,

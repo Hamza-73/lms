@@ -5,6 +5,7 @@ import Loading from '../Loading';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import { Modal } from 'react-bootstrap';
+import {server} from '../server'
 
 const Tasks = (props) => {
   const [file, setFile] = useState();
@@ -41,7 +42,7 @@ const Tasks = (props) => {
 
       console.log('form data is ', formData);
 
-      const response = await fetch('http://localhost:5000/student/upload', {
+      const response = await fetch(`${server}/student/upload`, {
         method: 'POST',
         headers: {
           Authorization: localStorage.getItem('token'),
@@ -88,7 +89,7 @@ const Tasks = (props) => {
         return;
       }
       console.log('before fetch');
-      const response = await fetch('http://localhost:5000/student/my-group', {
+      const response = await fetch(`${server}/student/my-group`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

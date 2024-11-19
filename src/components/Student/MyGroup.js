@@ -4,6 +4,7 @@ import Loading from '../Loading';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import { Modal } from 'react-bootstrap';
+import {server} from '../server'
 
 const MyGroup = (props) => {
   const [group, setGroupDetails] = useState({
@@ -30,7 +31,7 @@ const MyGroup = (props) => {
         return;
       }
       console.log('before fetch')
-      const response = await fetch("http://localhost:5000/student/my-group", {
+      const response = await fetch(`${server}/student/my-group`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -84,7 +85,7 @@ const MyGroup = (props) => {
   const requestextension = async (e) => {
     try {
       e.preventDefault();
-      const response = await fetch('http://localhost:5000/student/extension', {
+      const response = await fetch(`${server}/student/extension`, {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",
@@ -121,7 +122,7 @@ const MyGroup = (props) => {
         return;
       }
 
-      const response = await fetch('http://localhost:5000/student/doc', {
+      const response = await fetch(`${server}/student/doc`, {
         method: 'POST',
         headers: {
           Authorization: localStorage.getItem('token'),
@@ -176,7 +177,7 @@ const MyGroup = (props) => {
 
   const requestMeeting = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/student/request-meeting`, {
+      const response = await fetch(`${server}/student/request-meeting`, {
         method: "POST",
         headers: {
           "Authorization": localStorage.getItem('token')

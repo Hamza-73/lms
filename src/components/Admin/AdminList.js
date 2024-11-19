@@ -5,6 +5,7 @@ import Loading from '../Loading';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import { Modal } from 'react-bootstrap';
+import {server} from '../server'
 
 const AdminList = (props) => {
   const history = useNavigate();
@@ -37,7 +38,7 @@ const AdminList = (props) => {
         NotificationManager.warning("Invalid Email Address");
         return;
       }
-      const response = await fetch("http://localhost:5000/admin/register", {
+      const response = await fetch(`${server}/admin/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -83,7 +84,7 @@ const AdminList = (props) => {
       }
 
       const id = selectedStudent._id;
-      const response = await fetch(`http://localhost:5000/admin/edit/${id}`,
+      const response = await fetch(`${server}/admin/edit/${id}`,
         {
           method: "PUT",
           headers: {
@@ -135,7 +136,7 @@ const AdminList = (props) => {
     if (confirmed) {
       try {
         console.log('id is ', id)
-        const response = await axios.delete(`http://localhost:5000/admin/delete/${id}`,
+        const response = await axios.delete(`${server}/admin/delete/${id}`,
           {
             headers: {
               'Content-Type': 'application/json',
@@ -161,7 +162,7 @@ const AdminList = (props) => {
   // Function to get members
   const getMembers = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/admin/get-members", {
+      const response = await axios.get(`${server}/admin/get-members`, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -183,7 +184,7 @@ const AdminList = (props) => {
         return;
       }
 
-      const response = await fetch(`http://localhost:5000/admin/detail`, {
+      const response = await fetch(`${server}/admin/detail`, {
         method: 'GET',
         headers: {
           'Authorization': token
@@ -365,7 +366,7 @@ const handleChange1 = (e) => {
     formData.append('excelFile', file);
 
     try {
-      const response = await fetch(`http://localhost:5000/upload/${userType}`, {
+      const response = await fetch(`${server}/upload/${userType}`, {
         method: 'POST',
         body: formData,
       });

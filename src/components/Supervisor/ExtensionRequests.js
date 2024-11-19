@@ -2,13 +2,14 @@ import React, { useState } from 'react'
 import { useEffect } from 'react';
 import Loading from '../Loading';
 import { NotificationContainer } from 'react-notifications';
+import {server} from '../server'
 
 const ExtensionRequests = () => {
     const [data, setData] = useState({ member: [] });
     const [loading, setLoading] = useState(false);
     const getDetail = async () => {
         try {
-            const response = await fetch(`http://localhost:5000/supervisor/detail`, {
+            const response = await fetch(`${server}/supervisor/detail`, {
                 method: "GET",
                 headers: {
                     "Authorization": localStorage.getItem("token")
@@ -33,7 +34,7 @@ const ExtensionRequests = () => {
 
     const handleRequest = async (id, action) => {
         try {
-            const response = await fetch(`http://localhost:5000/supervisor/extension/${id}/${action}`, {
+            const response = await fetch(`${server}/supervisor/extension/${id}/${action}`, {
                 method: "POST",
                 headers: {
                     "Authorization": localStorage.getItem('token')

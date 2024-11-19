@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Loading from "../Loading";
+import {server} from '../server'
 
 const GroupDetail = () => {
   const [group, setGroup] = useState({
@@ -30,7 +31,7 @@ const GroupDetail = () => {
   const giveReviews = async (e) => {
     try {
       e.preventDefault();
-      const response = await fetch(`http://localhost:5000/supervisor/reviews/${groupId}/${review
+      const response = await fetch(`${server}/supervisor/reviews/${groupId}/${review
         .index}`, {
         method: "PUT",
         headers: {
@@ -55,7 +56,7 @@ const GroupDetail = () => {
     try {
       const token = localStorage.getItem('token');
       setLoading(true);
-      const response = await fetch('http://localhost:5000/supervisor/my-groups', {
+      const response = await fetch(`${server}/supervisor/my-groups`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

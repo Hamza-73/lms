@@ -6,6 +6,7 @@ import 'react-clock/dist/Clock.css';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import { Modal } from 'react-bootstrap';
+import {server} from '../server'
 
 const Event = (props) => {
   const [data, setData] = useState({ vivas: [] });
@@ -27,7 +28,7 @@ const Event = (props) => {
         alert('Authorization token not found', 'danger');
         return;
       }
-      const response = await fetch("http://localhost:5000/external/get-externals", {
+      const response = await fetch(`${server}/external/get-externals`, {
         method: "GET",
         headers: {
           'Content-Type': 'application/json'
@@ -44,7 +45,7 @@ const Event = (props) => {
   const editViva = async (e) => {
     try {
       e.preventDefault();
-      const response = await fetch(`http://localhost:5000/viva/edit`, {
+      const response = await fetch(`${server}/viva/edit`, {
         method: "PUT",
         headers: {
           'Content-Type': 'application/json',
@@ -76,7 +77,7 @@ const Event = (props) => {
   // Function to get members
   const getCommittee = async () => {
     try {
-      const response = await fetch("http://localhost:5000/supervisor/get-supervisors", {
+      const response = await fetch(`${server}/supervisor/get-supervisors`, {
         method: "GET",
         headers: {
           'Content-Type': 'application/json'
@@ -92,7 +93,7 @@ const Event = (props) => {
   const getVivas = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`http://localhost:5000/viva/vivas`, {
+      const response = await fetch(`${server}/viva/vivas`, {
         method: 'GET',
       });
       const json = await response.json();

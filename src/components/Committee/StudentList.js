@@ -5,6 +5,7 @@ import Loading from '../Loading';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import { Modal } from 'react-bootstrap';
+import {server} from '../server'
 
 const StudentList = (props) => {
   const history = useNavigate();
@@ -65,7 +66,7 @@ const StudentList = (props) => {
     }
 
     try {
-      const response = await fetch("http://localhost:5000/student/register", {
+      const response = await fetch(`${server}/student/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -150,7 +151,7 @@ const StudentList = (props) => {
         return;
       }
 
-      const response = await fetch(`http://localhost:5000/student/edit/${id}`, // Assuming _id is the correct identifier for a student
+      const response = await fetch(`${server}/student/edit/${id}`, // Assuming _id is the correct identifier for a student
         {
           method: "PUT",
           headers: {
@@ -193,7 +194,7 @@ const StudentList = (props) => {
     if (confirmed) {
       try {
         console.log('id is ', id)
-        const response = await fetch(`http://localhost:5000/student/delete/${id}`,
+        const response = await fetch(`${server}/student/delete/${id}`,
           {
             method: "DELETE",
             headers: {
@@ -224,7 +225,7 @@ const StudentList = (props) => {
         alert('Authorization token not found', 'danger');
         return;
       }
-      const response = await axios.get("http://localhost:5000/student/get-students", {
+      const response = await axios.get(`${server}/student/get-students`, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -338,7 +339,7 @@ const StudentList = (props) => {
         return;
       }
 
-      const response = await fetch(`http://localhost:5000/${props.detailLink}/detail`, {
+      const response = await fetch(`${server}/${props.detailLink}/detail`, {
         method: 'GET',
         headers: {
           'Authorization': token
@@ -423,7 +424,7 @@ const StudentList = (props) => {
     formData.append('excelFile', file);
 
     try {
-      const response = await fetch(`http://localhost:5000/upload/${userType}`, {
+      const response = await fetch(`${server}/upload/${userType}`, {
         method: 'POST',
         body: formData,
       });

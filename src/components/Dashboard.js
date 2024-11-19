@@ -5,6 +5,7 @@ import { NotificationContainer, NotificationManager } from 'react-notifications'
 import 'react-notifications/lib/notifications.css';
 import { useNavigate } from 'react-router-dom';
 import image from '../images/home.jpg'
+import {server} from './server'
 
 const Dashboard = (props) => {
   const history = useNavigate();
@@ -19,7 +20,7 @@ const Dashboard = (props) => {
         return;
       }
       setLoading(true);
-      const response = await axios.get("http://localhost:5000/rules/get-all-roles", {
+      const response = await axios.get(`${server}/rules/get-all-roles`, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': token,

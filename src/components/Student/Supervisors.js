@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Loading from '../Loading';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
+import {server} from '../server'
 
 const Supervisors = (props) => {
   const history = useNavigate();
@@ -22,7 +23,7 @@ const Supervisors = (props) => {
         alert('Authorization token not found', 'danger');
         return;
       }
-      const response = await axios.get("http://localhost:5000/supervisor/get-supervisors", {
+      const response = await axios.get(`${server}/supervisor/get-supervisors`, {
         headers: {
           'Content-Type': 'application/json'
         }

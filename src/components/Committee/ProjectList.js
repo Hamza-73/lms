@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import { Modal } from 'react-bootstrap';
+import {server} from '../server'
 
 const ProjectList = (props) => {
 
@@ -22,7 +23,7 @@ const ProjectList = (props) => {
         alert('Authorization token not found', 'danger');
         return;
       }
-      const response = await fetch("http://localhost:5000/committee/groups", {
+      const response = await fetch(`${server}/committee/groups`, {
         method: "GET",
       });
       const json = await response.json();
@@ -34,7 +35,7 @@ const ProjectList = (props) => {
 
   const giveRemarks = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/committee/remarks/${id}`,
+      const response = await fetch(`${server}/committee/remarks/${id}`,
         {
           method: "POST",
           headers: {
@@ -89,7 +90,7 @@ const ProjectList = (props) => {
         return;
       }
 
-      const response = await fetch(`http://localhost:5000/committee/detail`, {
+      const response = await fetch(`${server}/committee/detail`, {
         method: 'GET',
         headers: {
           'Authorization': token

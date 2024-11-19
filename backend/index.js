@@ -12,7 +12,7 @@ app.set('view engine', 'ejs');
 
 // Middlewares
 const corsOptions = {
-  origin: 'http://localhost:3000', // Replace with your frontend's URL
+  // origin: 'http://localhost:3000', // Replace with your frontend's URL
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   optionsSuccessStatus: 204,
@@ -31,7 +31,8 @@ app.use(fileUpload({
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // MongoDB connection
-const mongoURI = 'mongodb://127.0.0.1:27017/lms';
+const mongoURI = 'mongodb+srv://hamza:hamza1234@lms.3qvhk.mongodb.net/lms?retryWrites=true&w=majority&appName=lms';
+// const mongoURI = 'mongodb://127.0.0.1:27017/lms';
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const connection = mongoose.connection;

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Loading from './Loading';
 import '../css/meeting.css'
 import { Modal } from 'react-bootstrap';
+import {server} from './server'
 
 const Meeting = (props) => {
   const myStyle = {
@@ -29,7 +30,7 @@ const Meeting = (props) => {
   const getMeeting = async () => {
 
     try {
-      const response = await fetch(`http://localhost:5000/meeting/get-meeting`, {
+      const response = await fetch(`${server}/meeting/get-meeting`, {
         method: "GET",
         headers: {
           "Authorization": localStorage.getItem('token')
@@ -53,7 +54,7 @@ const Meeting = (props) => {
       }
       console.log('meeting is ', meeting)
       console.log('Meeting is scheduling');
-      const response = await fetch(`http://localhost:5000/meeting/meeting`, {
+      const response = await fetch(`${server}/meeting/meeting`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -94,7 +95,7 @@ const Meeting = (props) => {
     try {
       e.preventDefault();
       // console.log('meeting starts', meetingId)
-      const response = await fetch(`http://localhost:5000/meeting/edit-meeting/${meetingId}`, {
+      const response = await fetch(`${server}/meeting/edit-meeting/${meetingId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -182,7 +183,7 @@ const Meeting = (props) => {
       if (!confirmed) {
         return;
       } else {
-        const response = await fetch(`http://localhost:5000/meeting/delete-meeting/${id}`, {
+        const response = await fetch(`${server}/meeting/delete-meeting/${id}`, {
           method: "DELETE",
           headers: {
             "Authorization": localStorage.getItem('token')
@@ -254,7 +255,7 @@ const Meeting = (props) => {
     try {
       e.preventDefault();
       // console.log('review is ', review);
-      const response = await fetch(`http://localhost:5000/meeting/meeting-review/${meetingId}/${review}`, {
+      const response = await fetch(`${server}/meeting/meeting-review/${meetingId}/${review}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -289,7 +290,7 @@ const Meeting = (props) => {
           return;
         }
 
-        const response = await fetch(`http://localhost:5000/supervisor/detail`, {
+        const response = await fetch(`${server}/supervisor/detail`, {
           method: 'GET',
           headers: {
             'Authorization': token,
@@ -359,7 +360,7 @@ const Meeting = (props) => {
   const [groups, setGroups] = useState({ projectTitles: [] });
   const getGroups = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/meeting/supervisor`, {
+      const response = await fetch(`${server}/meeting/supervisor`, {
         method: "GET",
         headers: {
           "Authorization": localStorage.getItem("token")

@@ -6,6 +6,7 @@ import Calendar from 'react-calendar';
 import TimePicker from 'react-time-picker';
 import Loading from '../Loading';
 import { Modal } from 'react-bootstrap';
+import {server} from '../server'
 
 const ProjectProgress = (props) => {
   const [group, setGroup] = useState({ groups: [] });
@@ -21,7 +22,7 @@ const ProjectProgress = (props) => {
         alert('Authorization token not found', 'danger');
         return;
       }
-      const response = await fetch("http://localhost:5000/committee/progress", {
+      const response = await fetch(`${server}/committee/progress`, {
         method: "GET",
         headers: {
           'Content-Type': 'application/json'
@@ -39,7 +40,7 @@ const ProjectProgress = (props) => {
     try {
       e.preventDefault();
       console.log('duedate starts');
-      const response = await fetch(`http://localhost:5000/committee/dueDate`, {
+      const response = await fetch(`${server}/committee/dueDate`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -80,7 +81,7 @@ const ProjectProgress = (props) => {
         return;
       }
 
-      const response = await fetch(`http://localhost:5000/committee/detail`, {
+      const response = await fetch(`${server}/committee/detail`, {
         method: 'GET',
         headers: {
           'Authorization': token

@@ -4,6 +4,7 @@ import SideBar from '../SideBar';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import { Modal } from 'react-bootstrap';
+import {server} from '../server'
 
 const StuRequest = (props) => {
     const [requests, setRequests] = useState({
@@ -19,7 +20,7 @@ const StuRequest = (props) => {
         try {
             setLoading(true);
             const token = localStorage.getItem('token');
-            const response = await fetch('http://localhost:5000/student/getRequests', {
+            const response = await fetch(`${server}/student/getRequests`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -51,7 +52,7 @@ const StuRequest = (props) => {
         try {
             console.log('request is started');
             const token = localStorage.getItem('token');
-            const response = await fetch(`http://localhost:5000/student/process-request/${id}/${action}`, {
+            const response = await fetch(`${server}/student/process-request/${id}/${action}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

@@ -5,6 +5,7 @@ import Loading from '../Loading';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import { Modal } from 'react-bootstrap';
+import {server} from '../server'
 
 const ExtensionRequest = (props) => {
     const history = useNavigate();
@@ -68,7 +69,7 @@ const ExtensionRequest = (props) => {
                 return;
             }
 
-            const response = await fetch(`http://localhost:5000/committee/detail`, {
+            const response = await fetch(`${server}/committee/detail`, {
                 method: 'GET',
                 headers: {
                     'Authorization': token
@@ -109,7 +110,7 @@ const ExtensionRequest = (props) => {
                 return;
             }
             console.log('date again ', date)
-            const response = await fetch(`http://localhost:5000/committee/make-extension`, {
+            const response = await fetch(`${server}/committee/make-extension`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
