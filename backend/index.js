@@ -12,16 +12,13 @@ app.set('view engine', 'ejs');
 
 // Middlewares
 const corsOptions = {
-  // origin: 'https://fyp-ashen-chi.vercel.app', // Replace with your frontend's URL
-  origin: '*', // Replace with your frontend's URL
+  origin: 'https://fyp-ashen-chi.vercel.app', // Explicit frontend URL
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
-  optionsSuccessStatus: 204,
   allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
   exposedHeaders: 'Authorization',
   maxAge: 3600,
   preflightContinue: false,
-  optionsSuccessStatus: 204,
 };
 
 app.use(cors(corsOptions));
