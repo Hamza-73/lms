@@ -14,7 +14,6 @@ const Meeting = require('../models/Meeting');
 const Admin = require('../models/Admin');
 const Committee = require('../models/Committee');
 const nodemailer = require('nodemailer');
-const { RequestPageOutlined } = require('@mui/icons-material');
 const Viva = require('../models/Viva');
 
 router.post('/login', async (req, res) => {

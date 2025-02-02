@@ -12,8 +12,8 @@ app.set('view engine', 'ejs');
 
 // Middlewares
 const corsOptions = {
-  origin: 'https://fyp-lms-two.vercel.app', // Replace with your frontend's URL
-  // origin: 'http://localhost:3000', // Replace with your frontend's URL
+  // origin: 'https://fyp-lms-two.vercel.app', // Replace with your frontend's URL
+  origin: 'http://localhost:3000', // Replace with your frontend's URL
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   optionsSuccessStatus: 204,
@@ -32,14 +32,25 @@ app.use(fileUpload({
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // MongoDB connection
-const mongoURI = 'mongodb+srv://hamza:hamza1234@lms.3qvhk.mongodb.net/lms?retryWrites=true&w=majority&appName=lms';
+// const mongoURI = 'mongodb+srv://hamza:hamza1234@lms.3qvhk.mongodb.net/lms?retryWrites=true&w=majority&appName=lms';
+// const mongoURI = 'mongodb+srv://hamza:hamza1234@lms.3qvhk.mongodb.net/';
 // const mongoURI = 'mongodb://127.0.0.1:27017/lms';
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
+// mongoose.connect("mongodb+srv://hamza:hamza1234@lms.3qvhk.mongodb.net/lms?retryWrites=true&w=majority&appName=lms");
 
-const connection = mongoose.connection;
-connection.once('open', () => {
-  console.log('MongoDB database connection established successfully');
-});
+mongoose
+  .connect(
+    // "mongodb+srv://hamza:hamza1234@lms.3qvhk.mongodb.net/lms?retryWrites=true&w=majority&appName=lms"
+    "mongodb+srv://hamza:hamza1234@lms.3qvhk.mongodb.net/lms?retryWrites=true&w=majority&appName=lms"
+    // 'mongodb://127.0.0.1:27017/lms'
+  )
+  .then((data) => {
+    console.log("MongoDB Connected");
+  });
+
+// const connection = mongoose.connection;
+// connection.once('open', () => {
+//   console.log('MongoDB database connection established successfully');
+// });
 
 // Routes
 const loginRoute = require('./routes/Login');
